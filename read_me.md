@@ -1,1 +1,0 @@
-Semestrální práce pro web
