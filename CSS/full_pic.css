@@ -1,0 +1,22 @@
+.bg-image-full {
+    background: no-repeat center center scroll;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    background-size: cover;
+    -o-background-size: cover;
+}
+
+.carItem {
+    color: black;
+    font-weight: bold;
+    max-width: 200px;
+    background: rgba(255,255,255,0.7);
+}
+
+.carItemP {
+    color: black;
+    font-weight: bold;
+    max-width: 250px;
+    background: rgba(255,255,255,0.7);
+    font-size: 80%;
+}
