@@ -1,10 +1,212 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="cs">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <meta name="description" content="FAQ stránka webu PandeBros">
+    <meta name="keywords" content="faq, pandebros">
+    <meta name="author" content="David Muhr">
+    <!-- nastaveni viewportu je zakladem pro responzivni design i Boostrap -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>PandeBros-FAQ</title>
+
+    <link rel="stylesheet" href="composer/vendor/twbs/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="composer/vendor/components/font-awesome/css/font-awesome.min.css">
+
+    <!-- CSS-->
+    <link href="CSS/full_pic.css" rel="stylesheet">
+
 </head>
 <body>
+
+<!-- Hlavicka -->
+<header class="py-5 bg-image-full" style="background-image: url('https://eacea.ec.europa.eu/sites/eacea-site/files/page-header-covid.png');">
+    <div class="container">
+        <h1 class="font-weight-bold text-warning" style="text-shadow: black 1px 2px">PandeBros</h1>
+        <p class="text-warning" style="text-shadow: black 1px 0">Pomáhejme si!</p>
+    </div>
+</header>
+<!-- KONEC: Hlavicka -->
+
+<!-- Menu -->
+<nav class="navbar navbar-expand-sm bg-dark navbar-dark sticky-top pull">
+    <div class="container">
+        <!-- Brand -->
+        <a class="navbar-brand" href="uvod.html">
+            <span class="fa fa-plus"></span>
+            PandeBros
+        </a>
+
+        <!-- Toggler/collapsibe Button -->
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <!-- Navbar links -->
+        <div class="collapse navbar-collapse" id="collapsibleNavbar">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" href="nabidky.html">Nabídky</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="registrace.html">Přihlásit/Registrovat</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="faq.html">FAQ</a>
+                </li>
+                <!-- Dropdown -->
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
+                        Účet
+                    </a>
+                    <div class="dropdown-menu">
+                        <a class="dropdown-item" href="">Profil</a>
+                        <a class="dropdown-item" href="">Vytvořit nabídku</a>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<br>
+<!-- KONEC: Menu -->
+
+<!-- Obsah FAQ -->
+
+<div class="container jumbotron">
+    <h1>FAQ / Často kladené otázky</h1>
+    <p> Rozklikněte si odpovědi pro otázky</p>
+    <h2>Obecné otázky</h2>
+    <div id="accordion">
+
+        <div class="card">
+            <div class="card-header">
+                <a class="card-link text-dark font-weight-bold" data-toggle="collapse" href="#collapseOne">
+                    Otázka 1
+                </a>
+            </div>
+            <div id="collapseOne" class="collapse" data-parent="#accordion">
+                <div class="card-body">
+                    Lorem ipsum..
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-header">
+                <a class="card-link text-dark font-weight-bold" data-toggle="collapse" href="#collapseTwo">
+                    Otázka 2
+                </a>
+            </div>
+            <div id="collapseTwo" class="collapse" data-parent="#accordion">
+                <div class="card-body">
+                    Lorem ipsum..
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-header">
+                <a class="card-link text-dark font-weight-bold" data-toggle="collapse" href="#collapseThree">
+                    Otázka 3
+                </a>
+            </div>
+            <div id="collapseThree" class="collapse" data-parent="#accordion">
+                <div class="card-body">
+                    Lorem ipsum..
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <br>
+    <h2>Bonusové otázky</h2>
+    <div id="accordion2">
+
+        <div class="card">
+            <div class="card-header">
+                <a class="card-link text-dark font-weight-bold" data-toggle="collapse" href="#collapse1">
+                    Otázka 1
+                </a>
+            </div>
+            <div id="collapse1" class="collapse" data-parent="#accordion2">
+                <div class="card-body">
+                    Lorem ipsum..
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-header">
+                <a class="card-link text-dark font-weight-bold" data-toggle="collapse" href="#collapse2">
+                    Otázka 2
+                </a>
+            </div>
+            <div id="collapse2" class="collapse" data-parent="#accordion2">
+                <div class="card-body">
+                    Lorem ipsum..
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-header">
+                <a class="card-link text-dark font-weight-bold" data-toggle="collapse" href="#collapse3">
+                    Otázka 3
+                </a>
+            </div>
+            <div id="collapse3" class="collapse" data-parent="#accordion2">
+                <div class="card-body">
+                    Lorem ipsum..
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+<br><br>
+<!-- Konec FAQ -->
+
+<!-- Nápověda -->
+<div class="row-cols-2 container-fluid fixed-bottom">
+    <div class="col-12 pull-right">
+        <span class="pull-right"><button class="btn btn-dark btn-sm" data-toggle="collapse" data-target="#demo2">Nápověda</button></span>
+    </div>
+    <div id="demo2" class="col-6 collapse text-justify text-light font-italic bg-dark rounded pull-right">
+        We're no strangers to love<br>
+        You know the rules and so do I<br>
+        A full commitment's what I'm thinking of<br>
+        You wouldn't get this from any other guy<br><br>
+        I just wanna tell you how I'm feeling<br>
+        Gotta make you understand<br><br>
+        Never gonna give you up<br>
+        Never gonna let you down<br>
+        Never gonna run around and desert you<br>
+        Never gonna make you cry<br>
+        Never gonna say goodbye<br>
+        Never gonna tell a lie and hurt you<br>
+    </div>
+</div>
+<!-- KONEC: Nápověda -->
+
+<!-- Paticka -->
+<footer class="container-fluid bg-dark text-white text-center font-weight-bold">
+    ZČU
+    <span class="fa fa-copyright"></span>
+    David Muhr 2021
+</footer>
+<!-- KONEC: Paticka -->
+
+<!-- ------------- JavaScripty ------------- -->
+
+<script src="composer/vendor/components/jquery/jquery.min.js"></script>
+<script src="composer/vendor/alexandermatveev/popper-bundle/AlexanderMatveev/PopperBundle/Resources/public/popper.min.js"></script>
+<script src="composer/vendor/twbs/bootstrap/dist/js/bootstrap.min.js"></script>
+
+
+<!-- ------------- KONEC: JavaScripty ------------- -->
+
 
 </body>
 </html>
