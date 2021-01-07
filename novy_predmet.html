@@ -1,10 +1,190 @@
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<html lang="cs">
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+    <meta charset="utf-8">
+    <meta name="description" content="Nové nabídky webu PandeBros">
+    <meta name="keywords" content="nova, nabidka, pandebros">
+    <meta name="author" content="David Muhr">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Pandebros-Nová nabídka</title>
+
+    <link rel="stylesheet" href="composer/vendor/twbs/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="composer/vendor/components/font-awesome/css/font-awesome.min.css">
+
+    <!-- CSS -->
+    <link href="CSS/full_pic.css" rel="stylesheet">
+    <style>
+        .is-required {
+            color: red;
+            font-weight: bold;
+        }
+    </style>
 </head>
 <body>
+
+<!-- Hlavicka -->
+<header class="py-5 bg-image-full" style="background-image: url('https://eacea.ec.europa.eu/sites/eacea-site/files/page-header-covid.png');">
+    <div class="container">
+        <h1 class="font-weight-bold text-warning" style="text-shadow: black 1px 2px">PandeBros</h1>
+        <p class="text-warning" style="text-shadow: black 1px 0">Pomáhejme si!</p>
+    </div>
+</header>
+<!-- KONEC: Hlavicka -->
+
+<!-- Menu -->
+<nav class="navbar navbar-expand-sm bg-dark navbar-dark sticky-top pull">
+    <div class="container">
+        <!-- Brand -->
+        <a class="navbar-brand" href="uvod.html">
+            <span class="fa fa-plus"></span>
+            PandeBros
+        </a>
+
+        <!-- Toggler/collapsibe Button -->
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <!-- Navbar links -->
+        <div class="collapse navbar-collapse" id="collapsibleNavbar">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" href="nabidky.html">Nabídky</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="registrace.html">Přihlásit/Registrovat</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="faq.html">FAQ</a>
+                </li>
+                <!-- Dropdown -->
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
+                        Účet
+                    </a>
+                    <div class="dropdown-menu">
+                        <a class="dropdown-item" href="">Profil</a>
+                        <a class="dropdown-item" href="">Vytvořit nabídku</a>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<br>
+<!-- KONEC: Menu -->
+
+<!-- Obsah Stránky -->
+
+<div>
+    <!-- Nový předmět -->
+
+    <div class="container jumbotron">
+        <!-- Registrace Uživatele-->
+        <div class="">
+            <form action="http://students.kiv.zcu.cz/~nyklm/+studenti-kiv-web/formular-zobrazeni.php" method="post"
+                  target="_blank" accept-charset="UTF-8" enctype="multipart/form-data" >
+                <fieldset class="form-group">
+                    <h1>Nová nabídka</h1>
+                    <br>
+
+                    <label for="n_lokace">
+                        Lokace<sup>*</sup>:
+                        <input type="text" class="form-control" name="login" id="n_lokace" placeholder="Vaše lokace" autofocus required>
+                    </label><br><br>
+
+                    <div>
+                        Poskytuji služby<sup>*</sup>:
+                        <label class="form-check" for="n_nakupy">
+                            <input type="checkbox" class="form-check-input" name="služby[]" value="nakupy" id="n_nakupy">
+                            <span class="badge badge-pill badge-primary">Nákupy</span>
+                        </label>
+                        <label class="form-check" for="n_spolecnost">
+                            <input type="checkbox" class="form-check-input" name="služby[]" value="spolecnost" id="n_spolecnost">
+                            <span class="badge badge-pill badge-secondary">Společnost</span>
+                        </label>
+                        <label class="form-check" for="n_telefonaty">
+                            <input type="checkbox" class="form-check-input" name="služby[]" value="telefonaty" id="n_telefonaty">
+                            <span class="badge badge-pill badge-danger">Telefonáty</span>
+                        </label>
+                        <label class="form-check" for="n_dovoz">
+                            <input type="checkbox" class="form-check-input" name="služby[]" value="dovoz" id="n_dovoz">
+                            <span class="badge badge-pill badge-success">Dovoz</span>
+                        </label>
+                        <label class="form-check" for="n_doucovani">
+                            <input type="checkbox" class="form-check-input" name="služby[]" value="doucovani" id="n_doucovani">
+                            <span class="badge badge-pill badge-warning">Doučování</span>
+                        </label>
+                        <label class="form-check" for="n_pomoc">
+                            <input type="checkbox" class="form-check-input" name="služby[]" value="pomoc" id="n_pomoc">
+                            <span class="badge badge-pill badge-info">Obecná pomoc</span>
+                        </label>
+                    </div>
+                    <br>
+
+                    <label for="n_info">
+                        Dodatečné informace<sup>*</sup>:<br>
+                        <textarea class="form-control" name="info" rows="6" cols="100" id="n_info" placeholder="-- Popište sebe, svojí pomoc, zkušenosti, dostupné dny --"></textarea>
+                    </label><br><br>
+
+                    <div class="form-group form-check">
+                        <label class="form-check-label">
+                            <input class="form-check-input" type="checkbox" name="agree" required> Souhlasím, že budu muset vykonat všechno, co jsem slíbil.
+                            <div class="valid-feedback">Valid.</div>
+                            <div class="invalid-feedback">Check this checkbox to continue.</div>
+                        </label>
+                    </div>
+
+                    <div class="is-required">
+                        * Musí být zadáno.
+                    </div><br>
+
+                    <input type="submit" class="btn btn-secondary" name="odeslano" value="Odeslat ke schválení">
+                </fieldset>
+            </form>
+        </div>
+    </div>
+
+</div>
+<!-- KONEC: Obsah Stránky -->
+
+<!-- Nápověda -->
+<div class="row-cols-2 container-fluid fixed-bottom">
+    <div class="col-12 pull-right">
+        <span class="pull-right"><button class="btn btn-dark btn-sm" data-toggle="collapse" data-target="#demo2">Nápověda</button></span>
+    </div>
+    <div id="demo2" class="col-6 collapse text-justify text-light font-italic bg-dark rounded pull-right">
+        We're no strangers to love<br>
+        You know the rules and so do I<br>
+        A full commitment's what I'm thinking of<br>
+        You wouldn't get this from any other guy<br><br>
+        I just wanna tell you how I'm feeling<br>
+        Gotta make you understand<br><br>
+        Never gonna give you up<br>
+        Never gonna let you down<br>
+        Never gonna run around and desert you<br>
+        Never gonna make you cry<br>
+        Never gonna say goodbye<br>
+        Never gonna tell a lie and hurt you<br>
+    </div>
+</div>
+<!-- KONEC: Nápověda -->
+
+<!-- Paticka -->
+<footer class="container-fluid bg-dark text-white text-center font-weight-bold">
+    ZČU
+    <span class="fa fa-copyright"></span>
+    David Muhr 2021
+</footer>
+<!-- KONEC: Paticka -->
+
+<!-- ------------- JavaScripty ------------- -->
+
+<script src="composer/vendor/components/jquery/jquery.min.js"></script>
+<script src="composer/vendor/alexandermatveev/popper-bundle/AlexanderMatveev/PopperBundle/Resources/public/popper.min.js"></script>
+<script src="composer/vendor/twbs/bootstrap/dist/js/bootstrap.min.js"></script>
 
 </body>
 </html>
