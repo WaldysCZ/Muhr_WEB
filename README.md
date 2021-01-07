@@ -1,3 +1,2 @@
 # Muhr_WEB
-
-Semestrální práce
+ Semestrální práce k KIV/WEB
