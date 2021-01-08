@@ -1,79 +1,18 @@
-<!doctype html>
-<html lang="cs">
-<head>
-    <meta charset="utf-8">
-    <meta name="description" content="Nabídky z webu PandeBros">
-    <meta name="keywords" content="nabídky, pandebros">
-    <meta name="author" content="David Muhr">
-    <!-- nastaveni viewportu je zakladem pro responzivni design i Boostrap -->
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+<?php
+global $tplData;
 
-    <title>Pandebros-Nabídky</title>
+require("ZakladHTML.class.php");
+$tplHeaders = new ZakladHTML();
 
-    <link rel="stylesheet" href="composer/vendor/twbs/bootstrap/dist/css/bootstrap.min.css">
-    <link rel="stylesheet" href="composer/vendor/components/font-awesome/css/font-awesome.min.css">
+$tplHeaders->createHeader($tplData['title']);
+?>
 
-    <!-- CSS-->
-    <link href="CSS/full_pic.css" rel="stylesheet">
-
-</head>
 <body>
-
-<!-- Hlavicka -->
-<header class="py-5 bg-image-full" style="background-image: url('https://eacea.ec.europa.eu/sites/eacea-site/files/page-header-covid.png');">
-    <div class="container">
-        <h1 class="font-weight-bold text-warning" style="text-shadow: black 1px 2px">PandeBros</h1>
-        <p class="text-warning" style="text-shadow: black 1px 0">Pomáhejme si!</p>
-    </div>
-</header>
-<!-- KONEC: Hlavicka -->
-
-<!-- Menu -->
-<nav class="navbar navbar-expand-sm bg-dark navbar-dark sticky-top pull">
-    <div class="container">
-        <!-- Brand -->
-        <a class="navbar-brand" href="uvod.html">
-            <span class="fa fa-plus"></span>
-            PandeBros
-        </a>
-
-        <!-- Toggler/collapsibe Button -->
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-
-        <!-- Navbar links -->
-        <div class="collapse navbar-collapse" id="collapsibleNavbar">
-            <ul class="navbar-nav">
-                <li class="nav-item">
-                    <a class="nav-link" href="nabidky.html">Nabídky</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="registrace.html">Přihlásit/Registrovat</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="faq.html">FAQ</a>
-                </li>
-                <!-- Dropdown -->
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
-                        Účet
-                    </a>
-                    <div class="dropdown-menu">
-                        <a class="dropdown-item" href="">Profil</a>
-                        <a class="dropdown-item" href="novy_predmet.html">Vytvořit nabídku</a>
-                    </div>
-                </li>
-            </ul>
-        </div>
-    </div>
-</nav>
-<br>
-<!-- KONEC: Menu -->
+<?php
+$tplHeaders->createNav($tplData['pravo']);
+?>
 
 <!-- Obsah Stránky -->
-
 <div class="container jumbotron">
     <h1> Nabídky </h1>
     <p>Vyberte si z nabídky našich schválených a ověřených pomocníků podle lokace a druhů pomoci, rozklikněte si pro více informací o dané osobě a jeho hodnocení.</p>
@@ -326,41 +265,7 @@
 <br>
 <!-- KONEC: Obsah stranky -->
 
-<!-- Nápověda -->
-<div class="row-cols-2 container-fluid fixed-bottom">
-    <div class="col-12 pull-right">
-        <span class="pull-right"><button class="btn btn-dark btn-sm" data-toggle="collapse" data-target="#nap">Nápověda</button></span>
-    </div>
-    <div id="nap" class="col-6 collapse text-justify text-light font-italic bg-dark rounded pull-right">
-        We're no strangers to love<br>
-        You know the rules and so do I<br>
-        A full commitment's what I'm thinking of<br>
-        You wouldn't get this from any other guy<br><br>
-        I just wanna tell you how I'm feeling<br>
-        Gotta make you understand<br><br>
-        Never gonna give you up<br>
-        Never gonna let you down<br>
-        Never gonna run around and desert you<br>
-        Never gonna make you cry<br>
-        Never gonna say goodbye<br>
-        Never gonna tell a lie and hurt you<br>
-    </div>
-</div>
-<!-- KONEC: Nápověda -->
-
-<!-- Paticka -->
-<footer class="container-fluid bg-dark text-white text-center font-weight-bold">
-    ZČU
-    <span class="fa fa-copyright"></span>
-    David Muhr 2021
-</footer>
-<!-- KONEC: Paticka -->
-
-<!-- ------------- JavaScripty ------------- -->
-
-<script src="composer/vendor/components/jquery/jquery.min.js"></script>
-<script src="composer/vendor/alexandermatveev/popper-bundle/AlexanderMatveev/PopperBundle/Resources/public/popper.min.js"></script>
-<script src="composer/vendor/twbs/bootstrap/dist/js/bootstrap.min.js"></script>
-
+<?php
+$tplHeaders->createFooter();
+?>
 </body>
-</html>
