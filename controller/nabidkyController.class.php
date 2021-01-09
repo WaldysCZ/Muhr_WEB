@@ -38,10 +38,21 @@ class nabidkyController
 
         $tplData['title'] = $pageTitle;
 
-        $tplData['nabidky'] = $this->db->getAllNabidky();
+        $nabidky = $this->db->getAllNabidky();
 
-        $tplData['pomoci'] = $this->db->getAllPomoci();
+        foreach ($nabidky as $key => $nabidka){
+            $nabidky[$key]['id_uzivatel'] = $this->db->getUserNameByID(($nabidka['id_uzivatel']));
 
+            $pomoci = $this->db->getAllpomociByIdNabídka($nabidka['id_nabidka']);
+
+            foreach ($pomoci as $keySecond => $pomoc){
+                $pomoci[$keySecond]['muhrd_typy_pomoci_id_pomoci'] = $this->db->getPomocNameById($pomoc['muhrd_typy_pomoci_id_pomoci']);
+            }
+
+            $tplData["pomoci".$nabidka["id_nabidka"]] = $pomoci;
+        }
+
+        $tplData['nabidky'] = $nabidky;
         /*
         if(isset($_POST['odhlasit']) and $_POST['odhlasit'] == "odhlasit"){
             $this->user->userLogout();

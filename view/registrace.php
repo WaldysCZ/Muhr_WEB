@@ -94,14 +94,13 @@ $tplHeaders->createNav($tplData['pravo']);
                             * Musí být zadáno.
                         </div><br>
 
-                        <input type="submit" class="btn btn-secondary" name="registruj" value="registruj">
+                        <button type="submit" class="btn btn-secondary" name="registruj" value="registruj">Registruj</button>
                     </fieldset>
                 </form>
             </div>
             <!-- Registrace Pomocníka-->
             <div class="col-sm-6 col-md-5 col-lg">
-                <form action="http://students.kiv.zcu.cz/~nyklm/+studenti-kiv-web/formular-zobrazeni.php" method="post"
-                      target="_blank" accept-charset="UTF-8" enctype="multipart/form-data" >
+                <form class="form-signin d-flex" method="post">
                     <fieldset class="form-group">
                         <h1>Registrace Pomocníka</h1>
                         <p>Staňte se i vy další pomocnou silou!</p>
@@ -110,33 +109,33 @@ $tplHeaders->createNav($tplData['pravo']);
                             <div class="input-group-prepend">
                                 <span class="input-group-text">Jméno<sup>*</sup></span>
                             </div>
-                            <input type="text" class="form-control" name="prijmeni" id="p_jmeno" placeholder="jméno" required>
-                            <input type="text" class="form-control" name="prijmeni" id="p_prijmeni" placeholder="prijmeni" required>
+                            <input type="text" class="form-control" name="jmenoP" id="p_jmeno" placeholder="jméno" required>
+                            <input type="text" class="form-control" name="prijmeniP" id="p_prijmeni" placeholder="prijmeni" required>
                         </div>
 
                         <label for="p_login">
                             Uživatelské jméno<sup>*</sup>:
-                            <input type="text" class="form-control" name="login" id="p_login" placeholder="login" autofocus required>
+                            <input type="text" class="form-control" name="loginP" id="p_login" placeholder="login" autofocus required>
                         </label><br>
 
                         <label for="p_mail">
                             E-mail<sup>*</sup>:
-                            <input type="email" class="form-control" name="mail" id="p_mail" placeholder="email@mail.com" required>
+                            <input type="email" class="form-control" name="emailP" id="p_mail" placeholder="email@mail.com" required>
                         </label><br>
 
                         <label for="p_tel">
                             Telefonní Číslo<sup>*</sup>:
-                            <input type="tel" class="form-control" name="telefon" id="p_tel" placeholder="+420 000 000 000" required>
+                            <input type="tel" class="form-control" name="telefonP" id="p_tel" placeholder="+420 000 000 000" required>
                         </label><br>
 
                         <label for="p_heslo">
                             Heslo<sup>*</sup>:
-                            <input type="password" class="form-control" name="heslo" id="p_heslo" placeholder="heslo" required>
+                            <input type="password" class="form-control" name="hesloP" id="p_heslo" placeholder="heslo" required>
                         </label><br>
 
                         <div class="form-group form-check">
                             <label class="form-check-label">
-                                <input class="form-check-input" type="checkbox" name="agree" required> Souhlasím, že nebudu zneužívat služby tohoto webu.
+                                <input class="form-check-input" type="checkbox" name="agree_1" required> Souhlasím, že nebudu zneužívat služby tohoto webu.
                                 <div class="valid-feedback">Valid.</div>
                                 <div class="invalid-feedback">Check this checkbox to continue.</div>
                             </label>
@@ -153,7 +152,7 @@ $tplHeaders->createNav($tplData['pravo']);
                             * Musí být zadáno.
                         </div><br>
 
-                        <input type="submit" class="btn btn-secondary" name="registrujP" value="registrujP">
+                        <button type="submit" class="btn btn-secondary" name="registrujP" value="registrujP">Registruj</button>
                     </fieldset>
                 </form>
             </div>

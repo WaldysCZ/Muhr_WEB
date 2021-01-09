@@ -52,18 +52,39 @@ class n_predmetController
             $tplData['pravo'] = null;
         }
 */
-        // Přidání nové řeky
+        // Přidání nové nabídky
         if (isset($_POST['pridejNabidku']) and isset($_POST['lokace'])
             and isset($_POST['info']) and
             $_POST['agree'] == true and
             $_POST['pridejNabidku'] == "pridejNabidku"){
 
-            $id_nabidka = 6;
             $id_uzivatel = 5;
             $lokace = htmlspecialchars($_POST['lokace']);
             $info = htmlspecialchars($_POST['info']);
 
-            $tplData['povedloSe'] = $this->db->vytvorNabidku($id_nabidka,$id_uzivatel,$lokace,$info);
+            $tplData['povedloSe'] = $this->db->vytvorNabidku($id_uzivatel,$lokace,$info);
+
+            $id_nabidka = $this->db->getLastIDNabidky();
+
+            // Pridání pomocí do tabulky
+            if ($pomoc = htmlspecialchars(isset($_POST['nakupy']))==true) {
+                $this->db->spojNabidkuSPomoci($id_nabidka,1);
+            }
+            if ($pomoc = htmlspecialchars(isset($_POST['spolecnost']))==true) {
+                $this->db->spojNabidkuSPomoci($id_nabidka,2);
+            }
+            if ($pomoc = htmlspecialchars(isset($_POST['telefon']))==true) {
+                $this->db->spojNabidkuSPomoci($id_nabidka,3);
+            }
+            if ($pomoc = htmlspecialchars(isset($_POST['dovoz']))==true) {
+                $this->db->spojNabidkuSPomoci($id_nabidka,4);
+            }
+            if ($pomoc = htmlspecialchars(isset($_POST['doucovani']))==true) {
+                $this->db->spojNabidkuSPomoci($id_nabidka,5);
+            }
+            if ($pomoc = htmlspecialchars(isset($_POST['pomoc']))==true) {
+                $this->db->spojNabidkuSPomoci($id_nabidka,6);
+            }
 
         }
 

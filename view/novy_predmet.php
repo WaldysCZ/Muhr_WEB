@@ -32,27 +32,27 @@ $tplHeaders->createNav($tplData['pravo']);
                     <div>
                         Poskytuji služby<sup>*</sup>:
                         <label class="form-check" for="n_nakupy">
-                            <input type="checkbox" class="form-check-input" name="služby[]" value="nakupy" id="n_nakupy">
+                            <input type="checkbox" class="form-check-input" name="nakupy" id="n_nakupy">
                             <span class="badge badge-pill badge-primary">Nákupy</span>
                         </label>
                         <label class="form-check" for="n_spolecnost">
-                            <input type="checkbox" class="form-check-input" name="služby[]" value="spolecnost" id="n_spolecnost">
+                            <input type="checkbox" class="form-check-input" name="spolecnost" id="n_spolecnost">
                             <span class="badge badge-pill badge-secondary">Společnost</span>
                         </label>
                         <label class="form-check" for="n_telefonaty">
-                            <input type="checkbox" class="form-check-input" name="služby[]" value="telefonaty" id="n_telefonaty">
+                            <input type="checkbox" class="form-check-input" name="telefon" id="n_telefonaty">
                             <span class="badge badge-pill badge-danger">Telefonáty</span>
                         </label>
                         <label class="form-check" for="n_dovoz">
-                            <input type="checkbox" class="form-check-input" name="služby[]" value="dovoz" id="n_dovoz">
+                            <input type="checkbox" class="form-check-input" name="dovoz" id="n_dovoz">
                             <span class="badge badge-pill badge-success">Dovoz</span>
                         </label>
                         <label class="form-check" for="n_doucovani">
-                            <input type="checkbox" class="form-check-input" name="služby[]" value="doucovani" id="n_doucovani">
+                            <input type="checkbox" class="form-check-input" name="doucovani" id="n_doucovani">
                             <span class="badge badge-pill badge-warning">Doučování</span>
                         </label>
                         <label class="form-check" for="n_pomoc">
-                            <input type="checkbox" class="form-check-input" name="služby[]" value="pomoc" id="n_pomoc">
+                            <input type="checkbox" class="form-check-input" name="pomoc" id="n_pomoc">
                             <span class="badge badge-pill badge-info">Obecná pomoc</span>
                         </label>
                     </div>

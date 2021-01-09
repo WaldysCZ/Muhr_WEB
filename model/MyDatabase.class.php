@@ -73,14 +73,6 @@ class MyDatabase
         }
     }
 
-    public function getUserById($idUzivatel) {
-        $users = $this->selectFromTable(TABLE_UZIVATEL,"id=$idUzivatel");
-        if(empty($users)) {
-            return null;
-        }
-        return $users(0);
-    }
-
     public function getAllNabidky():array {
         $q = "SELECT * FROM ".TABLE_NABIDKA;
 
@@ -110,6 +102,12 @@ class MyDatabase
         } else {
             return null;
         }
+    }
+
+    public function getUserNameByID(int $id): string {
+
+        $user = $this->selectFromTable(TABLE_UZIVATEL, "id_uzivatel='$id'");
+        return $user[0]['jmeno'];
     }
 
     public function vratUzivatele($login, $password){
@@ -179,7 +177,7 @@ class MyDatabase
      * @param int $visible          / Jestli už byla nebo nebyla schvalena
      * @return bool
      */
-    public function vytvorNabidku($id_nabídka, $id_uzivatel, $lokace, $info,int $hodnoceni=0, int $visible=0): bool
+    public function vytvorNabidku($id_uzivatel, $lokace, $info,int $hodnoceni=0, int $visible=0): bool
     {
 
         $q = "INSERT INTO ".TABLE_NABIDKA." (`id_nabidka`, `id_uzivatel`, `lokace`, `info`, `hodnoceni`, `visible`) 
@@ -199,13 +197,30 @@ class MyDatabase
         }
     }
 
-    public function schvalitNabidku(int $idNabidky):bool {
+    public function schvalitNabidku($idNabidky):bool {
 
-        $updateStatementWithValues = "visible='true'";
+        $updateStatementWithValues = "visible=1";
 
-        $whereStatement = "id_nabidky=$idNabidky";
+        $whereStatement = "id_nabidka=$idNabidky";
 
-        $this->updateInTable(TABLE_OBJEDNAVKA, $updateStatementWithValues, $whereStatement);
+        return $this->updateInTable(TABLE_NABIDKA, $updateStatementWithValues, $whereStatement);
+
+        /*
+        $updateStatementWithValues = "visible=1";
+
+        $whereStatement = "id_nabidka=$idNabidky";
+
+        $table = TABLE_NABIDKA;
+
+        $q = "UPDATE $table SET $updateStatementWithValues WHERE $whereStatement";
+
+        $obj = $this->executeQuery($q);
+        if($obj == null){
+            return false;
+        } else {
+            return true;
+        }
+*/
     }
 
     public function deleteNabídku(int $idNabidky):bool {
@@ -218,5 +233,46 @@ class MyDatabase
         } else {
             return false;
         }
+    }
+
+    public function getAllpomociByIdNabídka(int $idNabidka): array
+    {
+        $pomoci = $this->selectFromTable(TABLE_NABIDKA_POMOCI,"muhrd_nabidka_id_nabidka='$idNabidka'");
+        return $pomoci;
+    }
+
+    public function getPomocNameByID($id): string {
+        $pomoc = $this->selectFromTable(TABLE_POMOCI, "id_pomoci='$id'");
+        return $pomoc[0]['jmeno'];
+    }
+
+    public function getPomocById(int $id): array
+    {
+        $pomoc = $this->selectFromTable(TABLE_POMOCI, "id_pomoci='$id'");
+        return $pomoc[0];
+    }
+
+    public function spojNabidkuSPomoci(int $idNabidka, int $idPomoc): bool {
+
+        $q = "INSERT INTO ".TABLE_NABIDKA_POMOCI." (`muhrd_nabidka_id_nabidka`, `muhrd_typy_pomoci_id_pomoci`) 
+        VALUES (:idNabidka, :idPomoc);";
+        $vystup = $this->pdo->prepare($q);
+
+        $vystup->bindValue(":idNabidka", $idNabidka);
+        $vystup->bindValue(":idPomoc", $idPomoc);
+
+        if($vystup->execute()){
+            return true;
+        } else {
+            return false;
+        }
+
+    }
+
+    public function getLastIDNabidky(): string {
+
+        $nabidka = $this->selectFromTable(TABLE_NABIDKA, "",
+            "`id_nabidka` DESC");
+        return $nabidka[0]['id_nabidka'];
     }
 }

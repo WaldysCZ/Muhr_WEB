@@ -40,7 +40,28 @@ $tplHeaders->createNav($tplData['pravo']);
             <td><?php echo $nabidka["id_uzivatel"]; ?></td>
             <td><?php echo $nabidka["lokace"]; ?></td>
             <td>
-                TODO
+                <?php foreach ($tplData["pomoci".$nabidka["id_nabidka"]] as $pomocNabidky){ ?>
+                    <?php
+                    if ($pomocNabidky['muhrd_typy_pomoci_id_pomoci']=="Nákupy") {
+                        ?><span class="badge badge-pill badge-primary">Nákupy</span><?php
+                    }
+                    if ($pomocNabidky['muhrd_typy_pomoci_id_pomoci']=="Společnost") {
+                        ?><span class="badge badge-pill badge-secondary">Společnost</span><?php
+                    }
+                    if ($pomocNabidky['muhrd_typy_pomoci_id_pomoci']=="Telefonáty") {
+                        ?> <span class="badge badge-pill badge-danger">Telefonáty</span><?php
+                    }
+                    if ($pomocNabidky['muhrd_typy_pomoci_id_pomoci']=="Dovoz") {
+                        ?><span class="badge badge-pill badge-success">Dovoz</span><?php
+                    }
+                    if ($pomocNabidky['muhrd_typy_pomoci_id_pomoci']=="Doučování") {
+                        ?><span class="badge badge-pill badge-warning">Doučování</span><?php
+                    }
+                    if ($pomocNabidky['muhrd_typy_pomoci_id_pomoci']=="Obecná Pomoc") {
+                        ?><span class="badge badge-pill badge-info">Obecná pomoc</span><?php
+                    }
+                    ?>
+                <?php } ?>
             </td>
             <td class="text-center">
                 <a class="btn btn-sm btn-outline-secondary" data-toggle="collapse"

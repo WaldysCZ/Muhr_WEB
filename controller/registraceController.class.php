@@ -72,7 +72,28 @@ class registraceController
                 $tplData['login'] = "Registrace se zdařila! Vítejte ".$username;
             } else {
                 $tplData['povedloSe'] = false;
-                $tplData['login'] = "Je mi líto, ale registrace se nezdařila. Nejspíše už je tento email použit.";
+                $tplData['login'] = "Uživatelské jméno už je zabrané";
+            }
+        }
+
+        if (isset($_POST['registrujP'])){
+
+            $username = htmlspecialchars($_POST['loginP']);
+            $email = htmlspecialchars($_POST['emailP']);
+            $heslo = htmlspecialchars($_POST['hesloP']);
+
+            $jmeno = htmlspecialchars($_POST['jmenoP']);
+            $prijmeni = htmlspecialchars($_POST['prijmeniP']);
+            $telefon = htmlspecialchars($_POST['telefonP']);
+
+            $isRegistered = $this->db->getAUser($username);
+
+            if(!count($isRegistered)){
+                $this->db->registrujUzivatele($username,$heslo, $email,$jmeno,$prijmeni,$telefon,3);
+                $tplData['login'] = "Registrace se zdařila! Vítejte ".$username;
+            } else {
+                $tplData['povedloSe'] = false;
+                $tplData['login'] = "Uživatelské jméno už je zabrané";
             }
         }
 

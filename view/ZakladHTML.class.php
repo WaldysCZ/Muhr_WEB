@@ -121,27 +121,27 @@ class zakladHTML
      */
     public static function createFooter(){
         ?>
-        <!-- Nápověda -->
+        <!-- Kontakt -->
         <div class="row-cols-2 container-fluid fixed-bottom">
             <div class="col-12 pull-right">
-                <span class="pull-right"><button class="btn btn-dark btn-sm" data-toggle="collapse" data-target="#demo">Nápověda</button></span>
+                <span class="pull-right"><button class="btn btn-dark btn-sm" data-toggle="collapse" data-target="#demo">Kontakt</button></span>
             </div>
             <div id="demo" class="col-6 collapse text-justify text-light font-italic bg-dark rounded pull-right">
-                We're no strangers to love<br>
-                You know the rules and so do I<br>
-                A full commitment's what I'm thinking of<br>
-                You wouldn't get this from any other guy<br><br>
-                I just wanna tell you how I'm feeling<br>
-                Gotta make you understand<br><br>
-                Never gonna give you up<br>
-                Never gonna let you down<br>
-                Never gonna run around and desert you<br>
-                Never gonna make you cry<br>
-                Never gonna say goodbye<br>
-                Never gonna tell a lie and hurt you<br>
+                V případě potřeby nás můžete kontaktovat těmito způsoby:<br><br>
+                <b>Hlavní Email:</b> Never_gonna@give.you.up<br>
+                <b>Správcův Email:</b> Never_gonna@let.you.down<br>
+                <br>
+                <b>Hlavní Adresa</b><br>
+                <b>Město:</b> Never gonna run around and desert you<br>
+                <b>Ulice:</b> Never gonna make you cry<br>
+                <br>
+                <b>Adresa pobočky v Plzni</b><br>
+                <b>Ulice:</b> Never gonna say goodbye<br>
+                <br>
+                <b>Telefon</b>: Never gonna tell a lie and hurt you<br>
             </div>
         </div>
-        <!-- KONEC: Nápověda -->
+        <!-- KONEC: Kontakt -->
 
         <!-- Paticka -->
         <footer class="container-fluid bg-dark text-white text-center font-weight-bold">
