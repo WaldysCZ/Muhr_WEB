@@ -52,6 +52,21 @@ class n_predmetController
             $tplData['pravo'] = null;
         }
 */
+        // Přidání nové řeky
+        if (isset($_POST['pridejNabidku']) and isset($_POST['lokace'])
+            and isset($_POST['info']) and
+            $_POST['agree'] == true and
+            $_POST['pridejNabidku'] == "pridejNabidku"){
+
+            $id_nabidka = 6;
+            $id_uzivatel = 5;
+            $lokace = htmlspecialchars($_POST['lokace']);
+            $info = htmlspecialchars($_POST['info']);
+
+            $tplData['povedloSe'] = $this->db->vytvorNabidku($id_nabidka,$id_uzivatel,$lokace,$info);
+
+        }
+
         ob_start();
         require(DIRECTORY_VIEWS ."/novy_predmet.php");
         $obsah = ob_get_clean();

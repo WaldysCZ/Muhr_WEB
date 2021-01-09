@@ -5,6 +5,7 @@ require("ZakladHTML.class.php");
 $tplHeaders = new ZakladHTML();
 
 $tplHeaders->createHeader($tplData['title']);
+
 ?>
 
 <body>

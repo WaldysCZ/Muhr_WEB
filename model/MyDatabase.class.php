@@ -14,19 +14,209 @@ class MyDatabase
         $this->pdo->exec("set names utf8");
     }
 
-    public function getAllUsers(){
+    /**
+     *  Provede dotaz a bud vrati ziskana data, nebo pri chybe ji vypise a vrati null.
+     *
+     *  @param string $dotaz        SQL dotaz.
+     *  @return PDOStatement|null    Výsledek dotazu
+     */
+    private function executeQuery(string $dotaz): ?PDOStatement
+    {
 
-        $q = "SELECT * FROM". TABLE_UZIVATEL ."ORDER BY jmeno";
-
-        $res = $this->pdo->query($q);
-
-        if(!$res) {
-            return [];
-        }
-        else {
-            return $res->fetchAll();
+        $res = $this->pdo->query($dotaz);
+        if ($res) {
+            return $res;
+        } else {
+            $error = $this->pdo->errorInfo();
+            echo $error[2];
+            return null;
         }
     }
 
+    /**
+     * Select z jedné tabulky
+     *
+     * @param string $tableName         Název tabulky
+     * @param string $whereStatement    Pripadne omezeni na ziskani radek tabulky. Default "".
+     * @param string $orderByStatement  Pripadne razeni ziskanych radek tabulky. Default "".
+     * @return array                    Vraci pole ziskanych radek tabulky.
+     */
+    public function selectFromTable(string $tableName, string $whereStatement = "", string $orderByStatement = ""):array {
+        $q = "SELECT * FROM ".$tableName
+            .(($whereStatement == "") ? "" : " WHERE $whereStatement")
+            .(($orderByStatement == "") ? "" : " ORDER BY $orderByStatement");
 
+        $obj = $this->executeQuery($q);
+        if($obj == null){
+            return [];
+        }
+        return $obj->fetchAll();
+    }
+
+    /**
+     * Upráva řádku databáze
+     *
+     * @param string $tableName                     Nazev tabulky.
+     * @param string $updateStatementWithValues     Cela cast updatu s hodnotami.
+     * @param string $whereStatement                Cela cast pro WHERE.
+     * @return bool                                 Upraveno v poradku?
+     */
+    public function updateInTable(string $tableName, string $updateStatementWithValues, string $whereStatement):bool {
+
+        $q = "UPDATE $tableName SET $updateStatementWithValues WHERE $whereStatement";
+
+        $obj = $this->executeQuery($q);
+        if($obj == null){
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+    public function getUserById($idUzivatel) {
+        $users = $this->selectFromTable(TABLE_UZIVATEL,"id=$idUzivatel");
+        if(empty($users)) {
+            return null;
+        }
+        return $users(0);
+    }
+
+    public function getAllNabidky():array {
+        $q = "SELECT * FROM ".TABLE_NABIDKA;
+
+        return $this->pdo->query($q)->fetchAll();
+    }
+
+    public function getAllPomoci():array {
+        $q = "SELECT * FROM ".TABLE_POMOCI;
+
+        return $this->pdo->query($q)->fetchAll();
+    }
+
+    /**
+     * Získání uživatele podle loginu
+     *
+     * @param string $login    login pro vyhledání v databízi.
+     * @return array
+     */
+    public function getAUser(string $login): ?array
+    {
+        $q = "SELECT * FROM ".TABLE_UZIVATEL
+            ." WHERE login=:login;";
+        $user = $this->pdo->prepare($q);
+        $user->bindValue(":login",$login);
+        if($user->execute()){
+            return $user->fetchAll();
+        } else {
+            return null;
+        }
+    }
+
+    public function vratUzivatele($login, $password){
+        $q = "SELECT * FROM ".TABLE_UZIVATEL." WHERE login=:login AND heslo=:heslo;";
+        $vystup = $this->pdo->prepare($q);
+        $vystup->bindValue(":login", $login);
+        $vystup->bindValue(":heslo", $password);
+        if($vystup->execute()){
+            return $vystup->fetchAll();
+        } else {
+            return null;
+        }
+    }
+
+    /**
+     * Registruje nového uživatele
+     *
+     * @param $email /Email uživatele
+     * @param $username /Uživatelské jméno
+     * @param $password /Heslo
+     * @param string $pravo /právo uživatele
+     * @return bool         Povedlo se?
+     */
+    public function registrujUzivatele($username,$password,$email,$jmeno = "",$prijmeni="",
+        $telefon="",$pravo="4"): bool
+    {
+        $username = htmlspecialchars($username);
+        $password = htmlspecialchars($password);
+        $email = htmlspecialchars($email);
+        $jmeno = htmlspecialchars($jmeno);
+        $telefon = htmlspecialchars($telefon);
+
+        $name = $jmeno . " " . $prijmeni;
+
+        // Zda neni v databazi
+        $uzivatel = $this->vratUzivatele($username,$password);
+
+        if(!isset($uzivatel) || count($uzivatel)==0){
+
+            $q = "INSERT INTO ".TABLE_UZIVATEL." (`id_uzivatel`, `id_pravo`, `jmeno`, `login`, `heslo`, `email`, `telefon`) 
+            VALUES (NULL,:pravo, :jmeno, :login, :heslo, :email, :telefon);";
+            $vystup = $this->pdo->prepare($q);
+            $vystup->bindValue(":pravo", $pravo);
+            $vystup->bindValue(":jmeno", $name);
+            $vystup->bindValue(":login", $username);
+            $vystup->bindValue(":heslo", $password);
+            $vystup->bindValue(":email", $email);
+            $vystup->bindValue(":telefon", $telefon);
+
+            if($vystup->execute()){
+                return true;
+            } else {
+                return false;
+            }
+        }
+        return false;
+    }
+
+    /**
+     * Vytvoření celé objednávky
+     *
+     * @param $id_nabídka           /ID nabídky
+     * @param $id_uzivatel              /ID uživatele, který vytvořil nabídku
+     * @param $lokace               /Lokace
+     * @param $info                 /Info
+     * @param $hodnoceni            /Hodnoceni nabidky, začíná na 0
+     * @param int $visible          / Jestli už byla nebo nebyla schvalena
+     * @return bool
+     */
+    public function vytvorNabidku($id_nabídka, $id_uzivatel, $lokace, $info,int $hodnoceni=0, int $visible=0): bool
+    {
+
+        $q = "INSERT INTO ".TABLE_NABIDKA." (`id_nabidka`, `id_uzivatel`, `lokace`, `info`, `hodnoceni`, `visible`) 
+        VALUES (NULL,:idUzivatel, :lokace, :info, :hodnoceni, :visible);";
+        $vystup = $this->pdo->prepare($q);
+
+        $vystup->bindValue(":idUzivatel", $id_uzivatel);
+        $vystup->bindValue(":lokace", $lokace);
+        $vystup->bindValue(":info", $info);
+        $vystup->bindValue(":hodnoceni", $hodnoceni);
+        $vystup->bindValue(":visible", $visible);
+
+        if($vystup->execute()){
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public function schvalitNabidku(int $idNabidky):bool {
+
+        $updateStatementWithValues = "visible='true'";
+
+        $whereStatement = "id_nabidky=$idNabidky";
+
+        $this->updateInTable(TABLE_OBJEDNAVKA, $updateStatementWithValues, $whereStatement);
+    }
+
+    public function deleteNabídku(int $idNabidky):bool {
+        $q = "DELETE FROM ".TABLE_NABIDKA." WHERE id_nabidka = $idNabidky";
+
+        $res = $this->pdo->query($q);
+
+        if ($res) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 }

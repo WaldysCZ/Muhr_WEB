@@ -17,9 +17,7 @@ $tplHeaders->createNav($tplData['pravo']);
 
 <div>
     <!-- Přihlášení -->
-    <form action="http://students.kiv.zcu.cz/~nyklm/+studenti-kiv-web/formular-zobrazeni.php" method="post"
-          target="_blank" accept-charset="UTF-8" autocomplete="on" enctype="multipart/form-data"
-    >
+    <form class="form-signin text-center d-flex" method="post">
         <!-- Osobni udaje uzivatele -->
         <fieldset class="container jumbotron form-group">
             <h1>Přihlášení</h1>
@@ -47,13 +45,11 @@ $tplHeaders->createNav($tplData['pravo']);
     <!-- KONEC: Přihlášení -->
 
     <!-- Registrace -->
-
     <div class="container jumbotron">
         <div class="row">
             <!-- Registrace Uživatele-->
             <div class="col-sm-6 col-md-5 col-lg">
-                <form action="http://students.kiv.zcu.cz/~nyklm/+studenti-kiv-web/formular-zobrazeni.php" method="post"
-                      target="_blank" accept-charset="UTF-8" enctype="multipart/form-data" >
+                <form class="form-signin d-flex" method="post">
                     <fieldset class="form-group">
                         <h1>Registrace</h1>
                         <p>Přidejte se a řekněte si o pomoc</p>
@@ -62,7 +58,7 @@ $tplHeaders->createNav($tplData['pravo']);
                             <div class="input-group-prepend">
                                 <span class="input-group-text">Jméno</span>
                             </div>
-                            <input type="text" class="form-control" name="prijmeni" id="rg_jmeno" placeholder="jméno">
+                            <input type="text" class="form-control" name="jmeno" id="rg_jmeno" placeholder="jméno">
                             <input type="text" class="form-control" name="prijmeni" id="rg_prijmeni" placeholder="prijmeni">
                         </div>
 
@@ -73,7 +69,7 @@ $tplHeaders->createNav($tplData['pravo']);
 
                         <label for="rg_mail">
                             E-mail<sup>*</sup>:
-                            <input type="email" class="form-control" name="mail" id="rg_mail" placeholder="email@mail.com" required>
+                            <input type="email" class="form-control" name="email" id="rg_mail" placeholder="email@mail.com" required>
                         </label><br>
 
                         <label for="rg_tel">
@@ -98,7 +94,7 @@ $tplHeaders->createNav($tplData['pravo']);
                             * Musí být zadáno.
                         </div><br>
 
-                        <input type="submit" class="btn btn-secondary" name="odeslano" value="Registrovat">
+                        <input type="submit" class="btn btn-secondary" name="registruj" value="registruj">
                     </fieldset>
                 </form>
             </div>
@@ -157,7 +153,7 @@ $tplHeaders->createNav($tplData['pravo']);
                             * Musí být zadáno.
                         </div><br>
 
-                        <input type="submit" class="btn btn-secondary" name="odeslano" value="Registrovat">
+                        <input type="submit" class="btn btn-secondary" name="registrujP" value="registrujP">
                     </fieldset>
                 </form>
             </div>

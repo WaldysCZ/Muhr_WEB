@@ -38,6 +38,7 @@ class zakladHTML
 
             <title><?=$title?></title>
 
+
         </head>
         <?php
     }
@@ -123,9 +124,9 @@ class zakladHTML
         <!-- Nápověda -->
         <div class="row-cols-2 container-fluid fixed-bottom">
             <div class="col-12 pull-right">
-                <span class="pull-right"><button class="btn btn-dark btn-sm" data-toggle="collapse" data-target="#demo2">Nápověda</button></span>
+                <span class="pull-right"><button class="btn btn-dark btn-sm" data-toggle="collapse" data-target="#demo">Nápověda</button></span>
             </div>
-            <div id="demo2" class="col-6 collapse text-justify text-light font-italic bg-dark rounded pull-right">
+            <div id="demo" class="col-6 collapse text-justify text-light font-italic bg-dark rounded pull-right">
                 We're no strangers to love<br>
                 You know the rules and so do I<br>
                 A full commitment's what I'm thinking of<br>

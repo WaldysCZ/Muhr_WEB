@@ -52,6 +52,30 @@ class registraceController
             $tplData['pravo'] = null;
         }
 */
+        if (isset($_POST['registruj']) and isset($_POST['email']) and
+            isset($_POST['heslo']) and isset($_POST['login']) and
+            $_POST['registruj'] == "registruj" and
+            $_POST['agree'] == true){
+
+            $username = htmlspecialchars($_POST['login']);
+            $email = htmlspecialchars($_POST['email']);
+            $heslo = htmlspecialchars($_POST['heslo']);
+
+            $jmeno = htmlspecialchars($_POST['jmeno']);
+            $prijmeni = htmlspecialchars($_POST['prijmeni']);
+            $telefon = htmlspecialchars($_POST['telefon']);
+
+            $isRegistered = $this->db->getAUser($username);
+
+            if(!count($isRegistered)){
+                $this->db->registrujUzivatele($username,$heslo, $email,$jmeno,$prijmeni,$telefon,4);
+                $tplData['login'] = "Registrace se zdařila! Vítejte ".$username;
+            } else {
+                $tplData['povedloSe'] = false;
+                $tplData['login'] = "Je mi líto, ale registrace se nezdařila. Nejspíše už je tento email použit.";
+            }
+        }
+
         ob_start();
         require(DIRECTORY_VIEWS ."/registrace.php");
         $obsah = ob_get_clean();

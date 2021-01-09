@@ -5,7 +5,7 @@ require_once(DIRECTORY_CONTROLLERS."/IController.interface.php");
 /**
  * Ovladač zajištující vypsání Nabídek
  */
-class nabidkyController
+class schvaleniController
 {
 
     /** @var MyDatabase $db  Sprava databaze. */
@@ -28,7 +28,7 @@ class nabidkyController
     }
 
     /**
-     * Vrátí obsah stránky s nabídky
+     * Vrátí obsah stránky pro schvaleni
      * @param string $pageTitle     Název stránky
      * @return string               Výpis
      */
@@ -58,7 +58,7 @@ class nabidkyController
         }
 */
         ob_start();
-        require(DIRECTORY_VIEWS ."/nabidky.php");
+        require(DIRECTORY_VIEWS ."/schvaleni.php");
         $obsah = ob_get_clean();
 
         return $obsah;

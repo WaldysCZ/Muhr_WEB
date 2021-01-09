@@ -19,15 +19,14 @@ $tplHeaders->createNav($tplData['pravo']);
     <div class="container jumbotron">
         <!-- Registrace Uživatele-->
         <div class="">
-            <form action="http://students.kiv.zcu.cz/~nyklm/+studenti-kiv-web/formular-zobrazeni.php" method="post"
-                  target="_blank" accept-charset="UTF-8" enctype="multipart/form-data" >
+            <form method="post" accept-charset="UTF-8" enctype="multipart/form-data" >
                 <fieldset class="form-group">
                     <h1>Nová nabídka</h1>
                     <br>
 
                     <label for="n_lokace">
                         Lokace<sup>*</sup>:
-                        <input type="text" class="form-control" name="login" id="n_lokace" placeholder="Vaše lokace" autofocus required>
+                        <input type="text" class="form-control" name="lokace" id="n_lokace" placeholder="Vaše lokace" autofocus required>
                     </label><br><br>
 
                     <div>
@@ -76,7 +75,7 @@ $tplHeaders->createNav($tplData['pravo']);
                         * Musí být zadáno.
                     </div><br>
 
-                    <input type="submit" class="btn btn-secondary" name="odeslano" value="Odeslat ke schválení">
+                    <button type="submit" class="btn btn-secondary" name="pridejNabidku" value="pridejNabidku">Odeslat ke schválení</button>
                 </fieldset>
             </form>
         </div>

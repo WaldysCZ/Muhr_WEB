@@ -94,6 +94,16 @@ const WEB_PAGES = array(
         "class_name" => "n_predmetController",
     ),
     //// KONEC: Nabídky ////
+
+    //// Schvaleni Nabidek ////
+    "schvaleni" => array(
+        "title" => "Schvaleni Nabidek",
+
+        //// kontroler
+        "file_name" => "schvaleniController.class.php",
+        "class_name" => "schvaleniController",
+    ),
+    //// KONEC: Schvaleni ////
 );
 
 // defaultni/vychozi stranka webu
