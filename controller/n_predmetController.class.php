@@ -21,9 +21,9 @@ class n_predmetController
         // inicializace prace s DB
         require_once (DIRECTORY_MODELS ."/MyDatabase.class.php");
         $this->db = new MyDatabase();
-        /*
+
         require_once (DIRECTORY_MODELS ."/userManage.php");
-        $this->user = new userManage();*/
+        $this->user = new userManage();
     }
 
     /**
@@ -37,28 +37,31 @@ class n_predmetController
 
         $tplData['title'] = $pageTitle;
 
-        /*
+
         if(isset($_POST['odhlasit']) and $_POST['odhlasit'] == "odhlasit"){
             $this->user->userLogout();
+            header('location: index.php?page=uvod');
         }
 
         $tplData['userLogged'] = $this->user->isUserLogged();
 
         if($tplData['userLogged']){
             $user = $this->user->getLoggedUserData();
-            $tplData['pravo'] = $user['PRAVA_id_prava'];
+            $tplData['pravo'] = $user['id_pravo'];
         } else {
         	// Nastavím právo pro nepřihlášeného uživatele NULL
             $tplData['pravo'] = null;
         }
-*/
+
         // Přidání nové nabídky
         if (isset($_POST['pridejNabidku']) and isset($_POST['lokace'])
             and isset($_POST['info']) and
             $_POST['agree'] == true and
             $_POST['pridejNabidku'] == "pridejNabidku"){
 
-            $id_uzivatel = 5;
+            $user = $this->user->getLoggedUserData();
+
+            $id_uzivatel = $user['id_uzivatel'];
             $lokace = htmlspecialchars($_POST['lokace']);
             $info = htmlspecialchars($_POST['info']);
 

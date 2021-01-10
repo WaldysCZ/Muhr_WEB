@@ -9,10 +9,24 @@ $tplHeaders->createHeader($tplData['title']);
 
 <body>
 <?php
-$tplHeaders->createNav($tplData['pravo']);
+if (!$tplData['userLogged']) {
+    $tplHeaders->createNav($tplData['pravo']);
+} else {
+    $tplHeaders->createNav($tplData['pravo'],"odhlaseni");
+}
 ?>
 
 <!-- Obsah Stránky -->
+<?php
+if(isset($_POST['objednej'])){
+    ?>
+    <div class="container alert alert-success alert-dismissible">
+        <button type="button" class="close" data-dismiss="alert">&times;</button>
+        <strong>Objednano!</strong> Pomocník se vám ozve, jakmile bude moct. Vaši objednanou nabídku si můžete zobrazit na profilu
+    </div>
+    <?php
+}
+?>
 <div class="container jumbotron">
     <h1> Nabídky </h1>
     <p>Vyberte si z nabídky našich schválených a ověřených pomocníků podle lokace a druhů pomoci, rozklikněte si pro více informací o dané osobě a jeho hodnocení.</p>
@@ -64,9 +78,12 @@ $tplHeaders->createNav($tplData['pravo']);
                 <?php } ?>
             </td>
             <td class="text-center">
-                <a class="btn btn-sm btn-outline-secondary" data-toggle="collapse"
-                   data-target="#demo<?php echo $nabidka['id_nabidka']?>">Podrobnosti</a>
-                <a href="#" class="btn btn-sm btn-secondary">Objednat</a>
+                <form class="d-flex text-center" method="post">
+                    <a class="btn btn-sm btn-outline-secondary" data-toggle="collapse"
+                       data-target="#demo<?php echo $nabidka['id_nabidka']?>">Podrobnosti</a>
+                    <button type="submit" name="objednej"
+                            value="objednej<?php echo $nabidka['id_nabidka']?>" class="btn btn-sm btn-secondary">Objednat</button>
+                </form>
             </td>
         </tr>
         <tr>

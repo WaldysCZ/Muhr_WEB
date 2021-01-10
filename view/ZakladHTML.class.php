@@ -93,20 +93,27 @@ class zakladHTML
                         <?php
                         if ($pravo != null){ ?>
                         <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
+                                <a class="nav-link dropdown-toggle" href="" id="navbardrop" data-toggle="dropdown">
                                     Účet
                                 </a>
                             <div class="dropdown-menu">
-                                <a class="dropdown-item" href="">Profil</a>
-                                <?php if ($pravo==5) { ?>
+                                <a class="dropdown-item" href="index.php?page=profil">Profil</a>
+                                <?php if ($pravo==3) { ?>
                                     <a class="dropdown-item" href="index.php?page=n_predmet">Vytvořit nabídku</a>
                                 <?php } ?>
-                                <?php if ($pravo==10) { ?>
-                                    <a class="dropdown-item" href="">Spravovat nabídky</a>
+                                <?php if ($pravo==2 || $pravo==1) { ?>
+                                    <a class="dropdown-item" href="index.php?page=schvaleni">Schválit nabídky</a>
                                 <?php } ?>
                             </div>
                         </li>
-                        <?php } ?>
+                        <?php }
+                        if ($stav!='prihlaseni'){ ?>
+                            <li class="nav-item">
+                                <form method="post">
+                                    <button type="submit" name="odhlasit" value="odhlasit" class="btn btn-outline-secondary">Odhlásit se</button>
+                                </form>
+                            </li> <?php }
+                        ?>
                     </ul>
                 </div>
             </div>

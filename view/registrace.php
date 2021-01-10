@@ -9,13 +9,76 @@ $tplHeaders->createHeader($tplData['title']);
 
 <body>
 <?php
-$tplHeaders->createNav($tplData['pravo']);
+if (!$tplData['userLogged']) {
+    $tplHeaders->createNav($tplData['pravo']);
+} else {
+    $tplHeaders->createNav($tplData['pravo'],"odhlaseni");
+}
 ?>
 
 <body>
 <!-- Obsah Stránky -->
 
+
 <div>
+    <?php
+    if(isset($_POST['prihlasit'])){
+
+        if($tplData['povedloSe']){
+          header("Location:index.php");
+            ?>
+
+            <?php
+        } else {
+            ?>
+            <div class="container alert alert-danger alert-dismissible">
+                <button type="button" class="close" data-dismiss="alert">&times;</button>
+                <strong>Chyba</strong> Zadali jste špatné jméno nebo heslo
+            </div>
+            <?php
+        }
+    }
+    ?>
+    <?php
+    if(isset($_POST['registruj'])){
+
+        if($tplData['povedloSe']){
+            ?>
+            <div class="container alert alert-success alert-dismissible">
+                <button type="button" class="close" data-dismiss="alert">&times;</button>
+                <strong>Povedlo se!</strong> Byl jste zaregistrován, můžete se přihlásit
+            </div>
+            <?php
+        } else {
+            ?>
+            <div class="container alert alert-danger alert-dismissible">
+                <button type="button" class="close" data-dismiss="alert">&times;</button>
+                <strong>Nepovedlo se!</strong> Uživatel už existuje
+            </div>
+            <?php
+        }
+    }
+    ?>
+    <?php
+    if(isset($_POST['registrujP'])){
+
+        if($tplData['povedloSe']){
+            ?>
+            <div class="container alert alert-success alert-dismissible">
+                <button type="button" class="close" data-dismiss="alert">&times;</button>
+                <strong>Povedlo se!</strong> Byl jste zaregistrován, můžete se přihlásit
+            </div>
+            <?php
+        } else {
+            ?>
+            <div class="container alert alert-danger alert-dismissible">
+                <button type="button" class="close" data-dismiss="alert">&times;</button>
+                <strong>Nepovedlo se!</strong> Uživatel už existuje
+            </div>
+            <?php
+        }
+    }
+    ?>
     <!-- Přihlášení -->
     <form class="form-signin text-center d-flex" method="post">
         <!-- Osobni udaje uzivatele -->
@@ -24,21 +87,14 @@ $tplHeaders->createNav($tplData['pravo']);
             <br>
             <label for="lb_login">
                 Uživatelské jméno:
-                <input type="text" class="form-control" name="login" id="lb_login" placeholder="login" autofocus required>
-            </label><br><br>
+                <input type="text" class="form-control" name="loginI" id="lb_login" placeholder="login" autofocus required>
+            </label><br>
 
             <label for="lb_heslo">
                 Heslo:
-                <input type="password" class="form-control" name="heslo" id="lb_heslo" placeholder="heslo" required>
+                <input type="password" class="form-control" name="hesloI" id="lb_heslo" placeholder="heslo" required>
             </label><br>
 
-            <div class="form-group form-check">
-                <label class="form-check-label">
-                    <input class="form-check-input" type="checkbox" name="remember"> Zapamatovat
-                    <div class="valid-feedback">Valid.</div>
-                    <div class="invalid-feedback">Check this checkbox to continue.</div>
-                </label>
-            </div>
             <input type="submit" class="btn btn-secondary" name="prihlasit" value="Přihlásit">
         </fieldset>
     </form>

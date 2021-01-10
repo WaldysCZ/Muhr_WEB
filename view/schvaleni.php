@@ -9,7 +9,11 @@ $tplHeaders->createHeader($tplData['title']);
 
 <body>
 <?php
-$tplHeaders->createNav($tplData['pravo']);
+if (!$tplData['userLogged']) {
+    $tplHeaders->createNav($tplData['pravo']);
+} else {
+    $tplHeaders->createNav($tplData['pravo'],"odhlaseni");
+}
 ?>
 
 <!-- Obsah Stránky -->
@@ -69,7 +73,8 @@ $tplHeaders->createNav($tplData['pravo']);
                                data-target="#demo<?php echo $nabidka['id_nabidka']?>">Podrobnosti</a>
                             <button type="submit" name="schval"
                                     value="schval<?php echo $nabidka['id_nabidka']?>" class="btn btn-sm btn-success">Schvalit</button>
-                            <a href="#" class="btn btn-sm btn-danger">Zamítnout</a>
+                            <button type="submit" name="zamitni"
+                                    value="zamitni<?php echo $nabidka['id_nabidka']?>" class="btn btn-sm btn-danger">Zamítnout</button>
                         </form>
                     </td>
                 </tr>

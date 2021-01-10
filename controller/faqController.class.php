@@ -22,9 +22,9 @@ class faqController
         // inicializace prace s DB
         require_once (DIRECTORY_MODELS ."/MyDatabase.class.php");
         $this->db = new MyDatabase();
-        /*
+
         require_once (DIRECTORY_MODELS ."/userManage.php");
-        $this->user = new userManage();*/
+        $this->user = new userManage();
     }
 
     /**
@@ -38,21 +38,22 @@ class faqController
 
         $tplData['title'] = $pageTitle;
 
-        /*
+
         if(isset($_POST['odhlasit']) and $_POST['odhlasit'] == "odhlasit"){
             $this->user->userLogout();
+            header('location: index.php?page=uvod');
         }
 
         $tplData['userLogged'] = $this->user->isUserLogged();
 
         if($tplData['userLogged']){
             $user = $this->user->getLoggedUserData();
-            $tplData['pravo'] = $user['PRAVA_id_prava'];
+            $tplData['pravo'] = $user['id_pravo'];
         } else {
         	// Nastavím právo pro nepřihlášeného uživatele NULL
             $tplData['pravo'] = null;
         }
-*/
+
         ob_start();
         require(DIRECTORY_VIEWS ."/faq.php");
         $obsah = ob_get_clean();

@@ -9,7 +9,11 @@ $tplHeaders->createHeader($tplData['title']);
 
 <body>
 <?php
-$tplHeaders->createNav($tplData['pravo']);
+if (!$tplData['userLogged']) {
+    $tplHeaders->createNav($tplData['pravo']);
+} else {
+    $tplHeaders->createNav($tplData['pravo'],"odhlaseni");
+}
 ?>
 
 <!-- Obsah Stránky -->

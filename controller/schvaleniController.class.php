@@ -22,9 +22,9 @@ class schvaleniController
         // inicializace prace s DB
         require_once (DIRECTORY_MODELS ."/MyDatabase.class.php");
         $this->db = new MyDatabase();
-        /*
+
         require_once (DIRECTORY_MODELS ."/userManage.php");
-        $this->user = new userManage();*/
+        $this->user = new userManage();
     }
 
     /**
@@ -60,23 +60,32 @@ class schvaleniController
             $test = $_POST;
             $idNabidky = str_split($test['schval'],6);
             $this->db->schvalitNabidku($idNabidky[1]);
+            header("Refresh:0",'location: index.php?page=schvaleni');
         }
 
-        /*
+        if(isset($_POST['zamitni'])) {
+            $test = $_POST;
+            $idNabidky = str_split($test['zamitni'],7);
+            $this->db->deleteNabidku($idNabidky[1]);
+            header("Refresh:0");
+        }
+
+
         if(isset($_POST['odhlasit']) and $_POST['odhlasit'] == "odhlasit"){
             $this->user->userLogout();
+            header('location: index.php?page=uvod');
         }
 
         $tplData['userLogged'] = $this->user->isUserLogged();
 
         if($tplData['userLogged']){
             $user = $this->user->getLoggedUserData();
-            $tplData['pravo'] = $user['PRAVA_id_prava'];
+            $tplData['pravo'] = $user['id_pravo'];
         } else {
         	// Nastavím právo pro nepřihlášeného uživatele NULL
             $tplData['pravo'] = null;
         }
-*/
+
         ob_start();
         require(DIRECTORY_VIEWS ."/schvaleni.php");
         $obsah = ob_get_clean();

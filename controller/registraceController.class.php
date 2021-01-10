@@ -21,9 +21,9 @@ class registraceController
         // inicializace prace s DB
         require_once (DIRECTORY_MODELS ."/MyDatabase.class.php");
         $this->db = new MyDatabase();
-        /*
+
         require_once (DIRECTORY_MODELS ."/userManage.php");
-        $this->user = new userManage();*/
+        $this->user = new userManage();
     }
 
     /**
@@ -37,21 +37,34 @@ class registraceController
 
         $tplData['title'] = $pageTitle;
 
-        /*
+
         if(isset($_POST['odhlasit']) and $_POST['odhlasit'] == "odhlasit"){
             $this->user->userLogout();
+            header('location: index.php?page=uvod');
         }
 
         $tplData['userLogged'] = $this->user->isUserLogged();
 
         if($tplData['userLogged']){
             $user = $this->user->getLoggedUserData();
-            $tplData['pravo'] = $user['PRAVA_id_prava'];
+            $tplData['pravo'] = $user['id_pravo'];
         } else {
         	// Nastavím právo pro nepřihlášeného uživatele NULL
             $tplData['pravo'] = null;
         }
-*/
+
+        if (isset($_POST['prihlasit'])){
+            $login = htmlspecialchars($_POST['loginI']);
+            $heslo = htmlspecialchars($_POST['hesloI']);
+            $uzivatel = $this->db->vratUzivatele($login,$heslo);
+            if (!empty($uzivatel)){
+                $tplData['userLogged'] = $this->user->userLogin($login,$heslo);
+                $tplData['povedloSe'] = true;
+            } else {
+                $tplData['povedloSe'] = false;
+            }
+        }
+
         if (isset($_POST['registruj']) and isset($_POST['email']) and
             isset($_POST['heslo']) and isset($_POST['login']) and
             $_POST['registruj'] == "registruj" and
@@ -69,10 +82,9 @@ class registraceController
 
             if(!count($isRegistered)){
                 $this->db->registrujUzivatele($username,$heslo, $email,$jmeno,$prijmeni,$telefon,4);
-                $tplData['login'] = "Registrace se zdařila! Vítejte ".$username;
+                $tplData['povedloSe'] = true;
             } else {
                 $tplData['povedloSe'] = false;
-                $tplData['login'] = "Uživatelské jméno už je zabrané";
             }
         }
 
@@ -90,10 +102,9 @@ class registraceController
 
             if(!count($isRegistered)){
                 $this->db->registrujUzivatele($username,$heslo, $email,$jmeno,$prijmeni,$telefon,3);
-                $tplData['login'] = "Registrace se zdařila! Vítejte ".$username;
-            } else {
+                $tplData['povedloSe'] = true;
+                } else {
                 $tplData['povedloSe'] = false;
-                $tplData['login'] = "Uživatelské jméno už je zabrané";
             }
         }
 

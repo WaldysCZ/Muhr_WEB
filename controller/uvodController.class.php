@@ -21,9 +21,9 @@ class uvodController implements IController {
         // inicializace prace s DB
         require_once (DIRECTORY_MODELS ."/MyDatabase.class.php");
         $this->db = new MyDatabase();
-        /*
+
         require_once (DIRECTORY_MODELS ."/userManage.php");
-        $this->user = new userManage();*/
+        $this->user = new userManage();
     }
 
     /**
@@ -37,7 +37,7 @@ class uvodController implements IController {
 
         $tplData['title'] = $pageTitle;
 
-        /*
+
         if(isset($_POST['odhlasit']) and $_POST['odhlasit'] == "odhlasit"){
             $this->user->userLogout();
         }
@@ -46,12 +46,12 @@ class uvodController implements IController {
 
         if($tplData['userLogged']){
             $user = $this->user->getLoggedUserData();
-            $tplData['pravo'] = $user['PRAVA_id_prava'];
+            $tplData['pravo'] = $user['id_pravo'];
         } else {
         	// Nastavím právo pro nepřihlášeného uživatele NULL
             $tplData['pravo'] = null;
         }
-*/
+
         ob_start();
         require(DIRECTORY_VIEWS ."/uvod.php");
         $obsah = ob_get_clean();

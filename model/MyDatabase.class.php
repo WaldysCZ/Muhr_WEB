@@ -73,6 +73,18 @@ class MyDatabase
         }
     }
 
+    public function deleteInTable(string $tableName, string $whereStatement):bool {
+
+        $q = "DELETE FROM $tableName WHERE $whereStatement";
+
+        $obj = $this->executeQuery($q);
+        if($obj == null){
+            return false;
+        } else {
+            return true;
+        }
+    }
+
     public function getAllNabidky():array {
         $q = "SELECT * FROM ".TABLE_NABIDKA;
 
@@ -81,6 +93,12 @@ class MyDatabase
 
     public function getAllPomoci():array {
         $q = "SELECT * FROM ".TABLE_POMOCI;
+
+        return $this->pdo->query($q)->fetchAll();
+    }
+
+    public function getAllUsers():array {
+        $q = "SELECT * FROM ".TABLE_UZIVATEL;
 
         return $this->pdo->query($q)->fetchAll();
     }
@@ -147,8 +165,8 @@ class MyDatabase
 
         if(!isset($uzivatel) || count($uzivatel)==0){
 
-            $q = "INSERT INTO ".TABLE_UZIVATEL." (`id_uzivatel`, `id_pravo`, `jmeno`, `login`, `heslo`, `email`, `telefon`) 
-            VALUES (NULL,:pravo, :jmeno, :login, :heslo, :email, :telefon);";
+            $q = "INSERT INTO ".TABLE_UZIVATEL." (`id_uzivatel`, `id_pravo`, `jmeno`, `login`, `heslo`, `email`, `telefon`, `id_vybrana_nabidka`) 
+            VALUES (NULL,:pravo, :jmeno, :login, :heslo, :email, :telefon, NULL);";
             $vystup = $this->pdo->prepare($q);
             $vystup->bindValue(":pravo", $pravo);
             $vystup->bindValue(":jmeno", $name);
@@ -204,41 +222,25 @@ class MyDatabase
         $whereStatement = "id_nabidka=$idNabidky";
 
         return $this->updateInTable(TABLE_NABIDKA, $updateStatementWithValues, $whereStatement);
-
-        /*
-        $updateStatementWithValues = "visible=1";
-
-        $whereStatement = "id_nabidka=$idNabidky";
-
-        $table = TABLE_NABIDKA;
-
-        $q = "UPDATE $table SET $updateStatementWithValues WHERE $whereStatement";
-
-        $obj = $this->executeQuery($q);
-        if($obj == null){
-            return false;
-        } else {
-            return true;
-        }
-*/
     }
 
-    public function deleteNabídku(int $idNabidky):bool {
-        $q = "DELETE FROM ".TABLE_NABIDKA." WHERE id_nabidka = $idNabidky";
+    public function deleteNabidku(int $idNabidky):bool {
+        $whereStatement = "id_nabidka= $idNabidky";
+        $whereStatement2 = "muhrd_nabidka_id_nabidka= $idNabidky";
 
-        $res = $this->pdo->query($q);
-
-        if ($res) {
-            return true;
-        } else {
-            return false;
-        }
+        $this->deleteInTable(TABLE_NABIDKA_POMOCI, $whereStatement2);
+        return $this->deleteInTable(TABLE_NABIDKA, $whereStatement);
     }
 
     public function getAllpomociByIdNabídka(int $idNabidka): array
     {
         $pomoci = $this->selectFromTable(TABLE_NABIDKA_POMOCI,"muhrd_nabidka_id_nabidka='$idNabidka'");
         return $pomoci;
+    }
+
+    public function getHodnoceni($id): int {
+        $hodnoceni= $this->selectFromTable(TABLE_NABIDKA, "id_nabidka='$id'");
+        return $hodnoceni[0]['hodnoceni'];
     }
 
     public function getPomocNameByID($id): string {
@@ -275,4 +277,43 @@ class MyDatabase
             "`id_nabidka` DESC");
         return $nabidka[0]['id_nabidka'];
     }
+
+    public function pridatNabidkaKUzivateli($idnabidka, $idUser): bool {
+        $updateStatementWithValues = "id_vybrana_nabidka=$idnabidka";
+
+        $whereStatement = "id_uzivatel=$idUser";
+
+        return $this->updateInTable(TABLE_UZIVATEL, $updateStatementWithValues, $whereStatement);
+
+    }
+
+    public function zrusitNabidku(int $idUser): bool {
+
+        $updateStatementWithValues = "id_vybrana_nabidka=null";
+
+        $whereStatement = "id_uzivatel=$idUser";
+
+        return $this->updateInTable(TABLE_UZIVATEL, $updateStatementWithValues, $whereStatement);
+
+    }
+
+    public function pridejHodnoceni($idNabidka, int $hodnoceni): bool {
+
+        $puvodniHodnoceni = $this->getHodnoceni($idNabidka);
+
+        if($puvodniHodnoceni!=0){
+            $suma = $puvodniHodnoceni + $hodnoceni;
+            $prumer = $suma/2;
+        }
+        else{
+            $prumer=$hodnoceni;
+        }
+
+        $updateStatementWithValues = "hodnoceni=$prumer";
+
+        $whereStatement = "id_nabidka=$idNabidka";
+
+        return $this->updateInTable(TABLE_NABIDKA, $updateStatementWithValues, $whereStatement);
+    }
+
 }

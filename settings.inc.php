@@ -104,6 +104,16 @@ const WEB_PAGES = array(
         "class_name" => "schvaleniController",
     ),
     //// KONEC: Schvaleni ////
+
+    //// Profil ////
+    "profil" => array(
+        "title" => "Účet",
+
+        //// kontroler
+        "file_name" => "profilController.class.php",
+        "class_name" => "profilController",
+    ),
+    //// KONEC: Profil ////
 );
 
 // defaultni/vychozi stranka webu
