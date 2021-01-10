@@ -74,7 +74,6 @@ class nabidkyController
             $user = $this->user->getLoggedUserData();
             $tplData['pravo'] = $user['id_pravo'];
         } else {
-        	// Nastavím právo pro nepřihlášeného uživatele NULL
             $tplData['pravo'] = null;
         }
 

@@ -81,8 +81,10 @@ if(isset($_POST['objednej'])){
                 <form class="d-flex text-center" method="post">
                     <a class="btn btn-sm btn-outline-secondary" data-toggle="collapse"
                        data-target="#demo<?php echo $nabidka['id_nabidka']?>">Podrobnosti</a>
+                    <?php if($tplData['pravo']==4) { ?>
                     <button type="submit" name="objednej"
                             value="objednej<?php echo $nabidka['id_nabidka']?>" class="btn btn-sm btn-secondary">Objednat</button>
+                    <?php  } ?>
                 </form>
             </td>
         </tr>
